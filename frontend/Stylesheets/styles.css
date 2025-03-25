@@ -1,0 +1,234 @@
+/* General Body Styling */
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+  background-color: #343a40 !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.8rem;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1.1rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff !important;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+/* Main Content Styling */
+.main-content {
+  margin-top: 30px;
+  padding: 30px 30px 0 30px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header Styling */
+h2 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* Add New Task Button */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  min-width: 180px;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-top: 30px;
+  table-layout: auto; /* Auto adjusts column width */
+}
+
+.table th, .table td {
+  padding: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table thead {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.table th {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.table td {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 30px;
+}
+
+/* Task Action Buttons */
+.btn-outline-info, .btn-outline-danger {
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 8px 18px;
+  margin: 5px;
+  min-width: 130px;
+}
+
+.btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Task Status & Priority Badges */
+.badge {
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+/* Responsive Table (Mobile) */
+@media (max-width: 768px) {
+  .table th, .table td {
+    padding: 14px; /* Increased padding for better touch accessibility */
+  }
+
+  .btn-primary {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Task Description Column - More Width on Small Screens */
+  .table td.task-description {
+    max-width: 400px; /* Much wider column for task description */
+    word-wrap: break-word;
+    white-space: normal; /* Allow wrapping text in task description */
+  }
+}
+
+/* Task Owner Styling */
+.task-owner {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f1f3f5;
+  transition: all 0.3s ease;
+}
+
+/* Table Styling - Enhancing Task Owner Column */
+.table td.task-owner {
+  text-align: left;
+  padding-left: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007bff;
+  border-left: 4px solid #007bff;
+}
+
+.table td.task-owner:hover {
+  color: #0056b3;
+  cursor: pointer;
+  background-color: #e9ecef;
+}
+
+/* Custom Styles */
+.modal-content {
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.form-control, .form-select, .btn {
+  border-radius: 10px;
+  padding: 12px;
+}
+
+button[type="submit"] {
+  padding: 15px 30px;
+  font-size: 18px;
+}

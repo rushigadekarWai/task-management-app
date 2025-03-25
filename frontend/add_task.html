@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+
+    <!-- ✅ Stylesheets -->
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ✅ Form Styling */
+        body {
+            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            border-radius: 12px;
+        }
+        .card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .form-label {
+            font-weight: 600;
+        }
+        .form-control {
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 10px #6c63ff;
+        }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        .btn {
+            transition: 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        #success-alert {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease;
+}
+.is-invalid {
+    border-color: #dc3545;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <i class="fas fa-tasks"></i> Task Manager
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">My Tasks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                <a href="#" class="btn btn-outline-light me-2" data-bs-toggle="tooltip" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <a href="#" class="btn btn-outline-light me-2" data-bs-toggle="tooltip" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </a>
+                <a href="#" class="btn btn-outline-light" data-bs-toggle="tooltip" title="Profile">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ✅ Main Content -->
+<div class="main-content">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="mb-4 text-center text-primary">➕ Add New Task</h2>
+
+            <!-- ✅ Task Form -->
+            <form id="task-form" novalidate>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="taskOwner" class="form-label">Task Owner</label>
+                        <input type="text" id="taskOwner" class="form-control" placeholder="Enter Task Owner" required>
+                        <div class="error" id="taskOwnerError"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="taskName" class="form-label">Task Name</label>
+                        <input type="text" id="taskName" class="form-control" placeholder="Enter Task Name" required>
+                        <div class="error" id="taskNameError"></div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="taskDescription" class="form-label">Description</label>
+                    <textarea id="taskDescription" class="form-control" rows="4" placeholder="Enter task description" required></textarea>
+                    <div class="error" id="taskDescriptionError"></div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" id="startDate" class="form-control" required>
+                        <div class="error" id="startDateError"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" id="dueDate" class="form-control" required>
+                        <div class="error" id="dueDateError"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="reminder" class="form-label">Reminder</label>
+                        <input type="datetime-local" id="reminder" class="form-control" required>
+                        <div class="error" id="reminderError"></div>
+                    </div>
+                </div>
+
+                <!-- ✅ Assigned To, Priority, and Status Section -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <label for="assignedTo" class="form-label">Assigned To</label>
+                        <input type="text" id="assignedTo" class="form-control" placeholder="Enter assignee's name" required>
+                        <div class="error" id="assignedToError"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="priority" class="form-label">Priority</label>
+                        <select id="priority" class="form-control" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                        <div class="error" id="priorityError"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="status" class="form-label">Status</label>
+                        <select id="status" class="form-control" required>
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <div class="error" id="statusError"></div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="index.html" class="btn btn-secondary">⬅️ Back to Dashboard</a>
+                    <button type="submit" class="btn btn-success">✅ Save Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Add the alert HTML to your page -->
+<div id="success-alert" class="alert alert-success" role="alert" style="display: none; position: absolute; top: 20px; right: 20px; z-index: 999;">
+    Task added successfully!
+  </div>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const form = document.getElementById('task-form');
+  
+          // ✅ Helper function to display error messages
+          const displayError = (input, message) => {
+              const errorDiv = document.getElementById(`${input.id}Error`);
+              if (message) {
+                  errorDiv.textContent = message;
+                  input.classList.add('is-invalid');
+              } else {
+                  errorDiv.textContent = '';
+                  input.classList.remove('is-invalid');
+              }
+          };
+  
+          // ✅ Form validation function
+          const validateForm = () => {
+              let isValid = true;
+  
+              // Collecting form inputs
+              const taskOwner = document.getElementById('taskOwner');
+              const taskName = document.getElementById('taskName');
+              const taskDescription = document.getElementById('taskDescription');
+              const startDate = document.getElementById('startDate');
+              const dueDate = document.getElementById('dueDate');
+              const reminder = document.getElementById('reminder');
+              const assignedTo = document.getElementById('assignedTo');
+              const priority = document.getElementById('priority');
+              const status = document.getElementById('status');
+  
+              // ✅ Basic validation
+              if (!taskOwner.value.trim()) {
+                  displayError(taskOwner, 'Task owner is required');
+                  isValid = false;
+              } else {
+                  displayError(taskOwner, '');
+              }
+  
+              if (!taskName.value.trim()) {
+                  displayError(taskName, 'Task name is required');
+                  isValid = false;
+              } else {
+                  displayError(taskName, '');
+              }
+  
+              if (!taskDescription.value.trim()) {
+                  displayError(taskDescription, 'Description is required');
+                  isValid = false;
+              } else {
+                  displayError(taskDescription, '');
+              }
+  
+              if (!startDate.value) {
+                  displayError(startDate, 'Start date is required');
+                  isValid = false;
+              } else {
+                  displayError(startDate, '');
+              }
+  
+              if (!dueDate.value) {
+                  displayError(dueDate, 'Due date is required');
+                  isValid = false;
+              } else if (dueDate.value < startDate.value) {
+                  displayError(dueDate, 'Due date cannot be before start date');
+                  isValid = false;
+              } else {
+                  displayError(dueDate, '');
+              }
+  
+              if (!reminder.value) {
+                  displayError(reminder, 'Reminder is required');
+                  isValid = false;
+              } else {
+                  displayError(reminder, '');
+              }
+  
+              if (!assignedTo.value.trim()) {
+                  displayError(assignedTo, 'Assignee name is required');
+                  isValid = false;
+              } else {
+                  displayError(assignedTo, '');
+              }
+  
+              return isValid;
+          };
+  
+          // ✅ Handle form submission
+          form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+  
+              if (!validateForm()) {
+                  console.log('Form validation failed');
+                  return;
+              }
+  
+              // ✅ Collecting form data
+              const formData = {
+                  task_owner: document.getElementById('taskOwner').value.trim(),
+                  task_name: document.getElementById('taskName').value.trim(),
+                  task_description: document.getElementById('taskDescription').value.trim(),
+                  start_date: document.getElementById('startDate').value,
+                  due_date: document.getElementById('dueDate').value,
+                  reminder: document.getElementById('reminder').value,
+                  assigned_to: document.getElementById('assignedTo').value.trim(),
+                  priority: document.getElementById('priority').value,
+                  status: document.getElementById('status').value
+              };
+  
+              try {
+                  const response = await fetch('http://localhost:3000/api/tasks', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(formData)
+                  });
+  
+                  if (response.ok) {
+                      // Show the success alert for 2 seconds
+                      const successAlert = document.getElementById('success-alert');
+                      successAlert.style.display = 'block';
+                      setTimeout(() => {
+                          successAlert.style.display = 'none';
+                      }, 2000);
+  
+                      // Clear form fields
+                      form.reset();  // This resets the form fields
+  
+                      window.location.href = 'index.html';  // Redirect back to the dashboard
+                  } else {
+                      const errorMessage = await response.text();
+                      console.error('Failed to add task:', errorMessage);
+                      alert('Failed to add task. Please try again.');
+                  }
+              } catch (error) {
+                  console.error('Error:', error);
+                  alert('An error occurred while adding the task.');
+              }
+          });
+      });
+  </script>
+  
+
+</body>
+</html>
